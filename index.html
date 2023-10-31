@@ -4,28 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script>
-        function countdown() {
-            var now = new Date();
-            var hours = now.getHours();
-            var minutes = now.getMinutes();
-            var seconds = now.getSeconds();
-            var target = new Date();
-            target.setHours(20);
-            target.setMinutes(0);
-            target.setSeconds(0);
-            if (target < now) {
-            target.setDate(target.getDate() + 1);
-            }
-            var diff = Math.floor((target - now) / 1000);
-            var hoursLeft = Math.floor(diff / 3600);
-            var minutesLeft = Math.floor((diff % 3600) / 60);
-            var secondsLeft = Math.floor(diff % 60);
-            document.getElementById("countdown").innerHTML = hoursLeft + "h " + minutesLeft + "m " + secondsLeft + "s";
-            setTimeout(countdown, 1000);
+    <title>halloween</title>
+<script>
+    function countdown() {
+        var now = new Date();
+        var target = new Date();
+        target.setHours(8);
+        target.setMinutes(0);
+        target.setSeconds(0);
+
+        // Verificar se hoje é terça-feira e o horário já passou
+        if (now.getDay() === 2 && now >= target) {
+            // Se sim, avançar para a próxima terça-feira
+            target.setDate(target.getDate() + 7);
+        } else if (now.getDay() !== 2) {
+            // Se não for terça-feira, avançar para a próxima terça-feira
+            target.setDate(target.getDate() + (2 + 7 - now.getDay()) % 7);
         }
+
+        var diff = Math.floor((target - now) / 1000);
+        var daysLeft = Math.floor(diff / (3600 * 24));
+        var hoursLeft = Math.floor((diff % (3600 * 24)) / 3600);
+        var minutesLeft = Math.floor((diff % 3600) / 60);
+        var secondsLeft = Math.floor(diff % 60);
+
+        document.getElementById("countdown").innerHTML = daysLeft + "d " + hoursLeft + "h " + minutesLeft + "m " + secondsLeft + "s";
+        setTimeout(countdown, 1000);
+    }
 </script>
+
 <style>
     @import url(https://fonts.googleapis.com/css?family=Quicksand:400,300,700);
 html {
@@ -190,13 +197,13 @@ body .main #content section p.timedescription {
         <div id="content">
             <img src="logo.png" alt="logo" width="200px">
             <div class="title">
-                <span>NASCIMENTO</span>
+                <span>ELAINE</span>
             </div>
-            <p>o frango acontecerá em:</p>
+            <p>O terror acontecerá em:</p>
             <div>
                 <span class="countdown" id="countdown"></span>
             </div>
-            <p>os videos estarão no nosso instagram!<a href="https://www.instagram.com/farofeirosfcgyn/" target="_blank"> clique aqui</a> para acessar!</p>
+            <p>Expectativas foram criadas! Espero me assustar...</p>
         </div>
     </div>
 </body>
